@@ -1,0 +1,38 @@
+.productDetails {
+    p {
+        font-size: 14px;
+        font-weight: 400;
+    }
+    h1.heading {
+        font-size: 30px;
+        font-weight: 600;
+        color: #333333;
+        margin-top: 0px;
+    }
+    h3.starting-price {
+        color: #ff3030;
+        font-weight: 400;
+        span {
+            font-size: 18px;
+        }
+    }
+
+    form {
+        .inputLabel {
+            font-weight: 600;
+            & span {
+                color: #ff3030;
+            }
+        }
+        .enroll-action {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            input.qty {
+                width: 70px;
+                text-align: center;
+                padding: 0px;
+            }
+        }
+    }
+}
