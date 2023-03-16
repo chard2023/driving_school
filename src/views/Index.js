@@ -5,6 +5,8 @@ import React from "react";
 // core components
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
+import Footer from "components/Footers/footer";
+
 // index sections
 import SectionButtons from "views/index-sections/SectionButtons.js";
 import SectionNavbars from "views/index-sections/SectionNavbars.js";
@@ -47,6 +49,7 @@ function Index() {
         <SectionDownload />
         <DemoFooter />
       </div>
+      <Footer />
     </>
   );
 }

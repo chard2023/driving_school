@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import env from "../../env";
+
 // nodejs library that concatenates strings
 import classnames from "classnames";
 // reactstrap components
@@ -16,38 +19,57 @@ import {
 import AccountHeader from "./accountHeader";
 
 // style
-import "./index.css"
+import "./index.scss"
 
 function IndexNavbar() {
-  const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
-  const [navbarCollapse, setNavbarCollapse] = React.useState(false);
-
+  const [navbarColor, setNavbarColor] = useState("navbar-transparent");
+  const [navbarCollapse, setNavbarCollapse] = useState(false);
+  const [logoSize, setLogoSize] = useState("");
   const toggleNavbarCollapse = () => {
     setNavbarCollapse(!navbarCollapse);
     document.documentElement.classList.toggle("nav-open");
   };
 
-  React.useEffect(() => {
+  const [courses, setCourses] = useState([]);
+  const getCourses = () => {
+    axios.get(`${env.API_BASE_URL}course`)
+    .then(res => {
+      let course_list = [];
+      for (let i = 0; i < res.data.length; i++) {
+        if (res.data[i].sub_course_name == '') {
+          course_list.push(res.data[i]);
+        }
+      }
+      setCourses(course_list);
+      console.log("course_list",course_list);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+  useEffect(() => {
+    getCourses();
     const updateNavbarColor = () => {
       if (
         document.documentElement.scrollTop > 299 ||
         document.body.scrollTop > 299
       ) {
         setNavbarColor("");
+        setLogoSize("small")
       } else if (
         document.documentElement.scrollTop < 300 ||
         document.body.scrollTop < 300
       ) {
         setNavbarColor("navbar-transparent");
+        setLogoSize("")
       }
     };
-
     window.addEventListener("scroll", updateNavbarColor);
 
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
-  });
+  }, []);
+  
   const new__nav = {
     display: "flex",
     flexDirection: "column",
@@ -57,14 +79,19 @@ function IndexNavbar() {
     <Navbar className={classnames("fixed-top", navbarColor)} expand="lg" style={new__nav}>
       <AccountHeader />
         <Container>
-          <div className="navbar-translate">
+          <div className="main-nav navbar-translate">
             <NavbarBrand
               data-placement="bottom"
               href="/index"
               target="_blank"
               title="Coded by Creative Tim"
             >
-              Paper Kit React
+              <img
+              alt="..."
+              className={classnames("brand-logo", logoSize)}
+              src={require("assets/img/logo1.png")}
+            />
+              {/* Paper Kit React */}
             </NavbarBrand>
             <button
               aria-expanded={navbarCollapse}
@@ -106,8 +133,22 @@ function IndexNavbar() {
                   Courses <i className="nc-icon nc-minimal-down" />
                 </NavLink>
                 <div className="dropdown-content">
+                {courses?.map((course, index) => (
+                  <div key={index}>
+                  {course?.sub_courses.length >= 1 ? 
                   <div className="dropdown">
-                  <a href="#">Theoretical Driving Course (TDC) <i className="nc-icon nc-minimal-down" /></a>
+                    <a href={`/courses/${course._id}`}>{course?.course_name} <i className="nc-icon nc-minimal-down" /></a>
+                    <div className="dropdown-content nested">
+                      {course?.sub_courses?.map((item, index) => (
+                        <a key={index} href={`/courses/${item._id}`}>{item?.name}</a>
+                      ))}
+                    </div>
+                  </div>
+                  :<a href="#">Training Center Course (TCC)</a>}
+                  </div>
+                ))}
+                  {/* <div className="dropdown">
+                    <a href="#">Theoretical Driving Course (TDC) <i className="nc-icon nc-minimal-down" /></a>
                     <div className="dropdown-content nested">
                       <a href="#">Classroom</a>
                       <a href="#">Online</a>
@@ -122,7 +163,7 @@ function IndexNavbar() {
                     </div>
                   </div>
                   <a href="#">Training Center Course (TCC)</a>
-                  <a href="#">Motorcycle Riding Course (MRC)</a>
+                  <a href="#">Motorcycle Riding Course (MRC)</a> */}
                 </div>
               </NavItem>
               <NavItem className="dropdown">
