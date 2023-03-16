@@ -1,0 +1,23 @@
+.center-main {
+    .card {
+        .card-body {
+            .action-btns {
+                // text-align: right;
+            }
+            .card-subtitle {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-weight: 400;
+            }
+            button.edit-pen {
+                position: absolute;
+                right: 0;
+                bottom: 29px;
+            }
+        }
+        &.add-center:hover {
+            transform: none!important;
+        }
+    }
+}
