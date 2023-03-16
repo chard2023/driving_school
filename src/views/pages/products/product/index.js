@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import env from "../../../../env";
 
 // 
@@ -31,14 +32,13 @@ import {
     TabPane
   } from "reactstrap";
 function ProductDetails(props) {
-  const [product, setProduct] = useState(null)
+  const [course, setCourse] = useState(null)
   const [activeTab, setActiveTab] = useState("1");
 
   useEffect(() => {
-    fetch(`${env.API_BASE_URL}product/${props.productId}`)
-      .then(response => response.json())
-      .then(data => setProduct(data))
-      .catch(error => console.error(error));
+    axios.get(`${env.API_BASE_URL}course/${props.productId}`)
+    .then(res => setCourse(res.data))
+    .catch(error => console.error(error));
   }, []);
 
   return (
@@ -46,40 +46,33 @@ function ProductDetails(props) {
     <Container className='productDetails pt-5'>
       <Row>
         <Col>
-        <img src={product?.image} width="100%" />
+        <img src={course?.img} width="100%" />
         </Col>
         <Col>
-          <h1 className='heading'>{product?.name}</h1>
-          <p className='mt-2'>{product?.description}</p>
-          <h3 className='starting-price'><span>Starts at </span>PHP {product?.starting_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</h3>
+          <h1 className='heading'>{course?.course_name}</h1>
+          <p className='mt-2'>{course?.short_desc}</p>
+          <h3 className='starting-price'><span>Starts at </span>PHP {course?.starting_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</h3>
           <Form>
-            <Row className="mt-4">
-              <Col md={4} className="inputLabel">Region</Col>
+            {course?.branches.length >=1 ? (
+              <Row className="mt-4">
+              <Col md={4} className="inputLabel">Branches</Col>
               <Col>
                 <FormGroup>
                   <Input
                     bsSize="sm"
-                    type="select">
-                    <option>
-                      1
-                    </option>
-                    <option>
-                      2
-                    </option>
-                    <option>
-                      3
-                    </option>
-                    <option>
-                      4
-                    </option>
-                    <option>
-                      5
-                    </option>
+                    type="select"
+                    placeholder="Select branch"
+                    >
+                      {course?.branches.map((branch,index) => {
+                        <option key={index} value={branch._id}>{branch.name}</option>
+                      })}
                   </Input>
                 </FormGroup>
               </Col>
               <Col md={2}></Col>
             </Row>
+            ):null}
+            
             <Row>
               <Col md={4} className="inputLabel">Course</Col>
               <Col>
