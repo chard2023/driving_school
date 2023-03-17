@@ -34,5 +34,43 @@
                 padding: 0px;
             }
         }
+        h5.total {
+            font-weight: 500;
+            color: #ff3030;
+        }
+    }
+    .long-desc-section {
+        margin-top: 60px;
+        border: solid 1px #d9d9d9;
+        .header-section {
+            background-color: #f4f4f4;
+            ul {
+                padding: 0px;
+                margin: 0px;
+                li {
+                    display: inline-block;
+                    padding: 10px 15px;
+                    background-color: #ffffff;
+                    border-right: solid 1px #d9d9d9;
+                    position: relative;
+                    h6 {
+                        margin: 0px;
+                    }
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        border-top: solid 1px #ffffff;
+                        left: 0;
+                        right: 0;
+                        bottom: -1px;
+                    }
+                }
+            }
+        }
+        .long-desc {
+            padding: 10px 15px;
+            border-top: solid 1px #d9d9d9;
+        }
     }
 }
+    

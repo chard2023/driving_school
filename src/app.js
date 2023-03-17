@@ -14,6 +14,7 @@ import UserRegisterPage from "views/pages/register";
 import RegisterPage from "views/examples/RegisterPage.js";
 import Products from "views/pages/products";
 import AdminRegister from "views/admin/register";
+import CartIndex from 'views/pages/cart';
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 
@@ -36,6 +37,8 @@ import AdminIndex from "views/admin";
             <Route path="/nucleo-icons" element={<NucleoIcons />}/>
             <Route path="/landing-page" element={<LandingPage />}/>
             <Route path="/profile-page" element={<ProfilePage />}/>
+            <Route path="/cart" element={<CartIndex />}/>
+            
             {!userDate && (
               <>
                 <Route path="/register" element={<UserRegisterPage />}/>

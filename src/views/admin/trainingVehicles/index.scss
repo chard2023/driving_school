@@ -9,4 +9,60 @@
     &.no-transform:hover {
         transform: none!important;
     }
+    .trainin-vehicle-fg {
+        button.btn-delete {
+            display: none;
+            padding: 7px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            background-color: unset;
+            color: red;
+            border: none;
+            font-size: 24px;
+            line-height: 24px;
+            transition: .2s;
+            &:active {
+                background-color: red;
+                color: #ffffff;
+            }
+            &:focus {
+                background-color: red;
+                color: #ffffff;
+            }
+        }
+        &:hover {
+            button.btn-delete {
+                display: block;
+            }
+        }
+    }
+    .hour-rates-fg {
+        button.btn-delete {
+            display: none;
+            padding: 7px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+            background-color: unset;
+            color: red;
+            border: none;
+            font-size: 24px;
+            line-height: 24px;
+            transition: .2s;
+            &:active {
+                background-color: red;
+                color: #ffffff;
+            }
+            &:focus {
+                background-color: red;
+                color: #ffffff;
+            }
+        }
+        &:hover {
+            button.btn-delete {
+                display: block;
+            }
+        }
+    }
 }

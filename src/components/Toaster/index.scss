@@ -1,0 +1,16 @@
+.global_toaster {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    z-index: 9999;
+    .message {
+        font-weight: 400;
+        font-size: 19px;
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

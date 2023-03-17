@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -31,7 +31,6 @@ import {
 // index sections
 
 function CourseIndex() {
-  const formRef = useRef(null);
 
   const [courses, setCourses] = useState([]);
   
@@ -66,39 +65,57 @@ function CourseIndex() {
   const [sub_course_list, setSubCourseList] = useState([]);
   const [select_all_sub_course, setSelectAllSubCourse] = useState(false);
 
+  const [on_submit, setOnSubmit] = useState(false);
 
+  const [METHOD, setMETHOD] = useState('post');
+  const [API_URL, setAPIURL] = useState(`${env.API_BASE_URL}course`);
+
+  const [preview, setPreview] = useState(null);
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreview(reader.result);
+    };
+    reader.readAsDataURL(selectedFile);
   };
 
   // Update image
-  const handleUpload = () => {
+  const handleUpload = async() => {
     const formData = new FormData();
     formData.append('file', file);
-    fetch(`${env.API_BASE_URL}upload`, {
-        method: 'POST',
-        body: formData
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        setFileUrl(data.fileUrl);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+    try {
+      const response = await axios.post(`${env.API_BASE_URL}upload`, formData);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    handleUpload();
+    setOnSubmit(true);
+    const formData = { img, course_name, sub_course_name, short_desc, long_desc, starting_price, branches, vehicle_courses, training_center, sub_courses };
+
+    try {
+      if (file) {
+        const uploadRes = await handleUpload();
+        setFileUrl(uploadRes.fileUrl);
+        if (uploadRes) {
+          formData.img = uploadRes.fileUrl;
+          postCourse(formData);
+        }
+      } else {
+        postCourse(formData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   
   // Post or Save course
-  const postCourse = () => {
-    if(course_name == '') {
-      return;
-    }
-
-    const formData = { img, course_name, sub_course_name, short_desc, long_desc, starting_price, branches, vehicle_courses, training_center, sub_courses };
+  const postCourse = (formData) => {
     console.log(formData);
     let newBranch = [];
     let newVehicleCourses = [];
@@ -135,26 +152,43 @@ function CourseIndex() {
       newSubCourses.push(sub_course);
     }
     formData.sub_courses = newSubCourses;
-
-    axios.post(`${env.API_BASE_URL}course`, formData)
-    .then(response => {
-      console.log(response.data);
-      setCourseName('')
-      setSubCourseName('')
-      setShortDesc('')
-      setLongDesc('')
-      setStartingPrice('')
-      setBranches('')
-      setVehicleCourses('')
-      setTrainingCenter('')
-      setSubCourses('')
+    console.log(METHOD, formData);
+    submitForm(formData);
+  }
+  
+  const submitForm = (formData) => {
+    console.log(formData);
+    axios({ 
+      method: METHOD, 
+      url: API_URL, 
+      data: formData 
+    })
+    // axios.post(`${env.API_BASE_URL}course`, formData)
+    .then(res => {
+      console.log(res);
+      setOnSubmit(false);
       getCourses();
+      resetForm();
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      formRef?.current?.reset();
     })
     .catch(error => {
       console.log(error);
     });
+  }
+  const resetForm = () => {
+    setPreview(null);
+    setFileUrl(null);
+    setCourseName('');
+    setSubCourseName('');
+    setShortDesc('');
+    setLongDesc('');
+    setStartingPrice(0);
+    setBranches([]);
+    setVehicleCourses([]);
+    setTrainingCenter([]);
+    setSubCourses([]);
+    setMETHOD('post');
+    setAPIURL(`${env.API_BASE_URL}course`);
   }
   // get course list
   const getCourses = () => {
@@ -174,6 +208,33 @@ function CourseIndex() {
       console.log(error);
     });
   }
+  const populateSelectOptions = (data, setState) => {
+    if (data.length >=1) {
+      const options = data.map(elmt => ({ value: elmt._id, label: elmt.name }));
+      setState(options);
+    }
+  };
+  const handleClickUpdateCourse = (course) => {
+    console.log(course);
+    setPreview(course.img);
+    setFileUrl(course.img);
+    setCourseName(course.course_name);
+    setSubCourseName(course.sub_course_name);
+    setShortDesc(course.short_desc);
+    setLongDesc(course.long_desc);
+    setStartingPrice(course.starting_price);
+    populateSelectOptions(course.branches, setBranches);
+    populateSelectOptions(course.vehicle_courses, setVehicleCourses);
+    populateSelectOptions(course.training_center, setTrainingCenter);
+    populateSelectOptions(course.sub_courses, setSubCourses);
+    setAPIURL(`${env.API_BASE_URL}course/${course._id}`)
+    setMETHOD('put');
+    setTimeout(() => {
+      const goToCreateCourse = document.getElementById("createCourse");
+      goToCreateCourse.scrollIntoView({ behavior: "smooth" });
+    }, 200);
+  }
+  
   // checkbox event toggle select all branch
   const handleSelectAllSubCourse = (event) => {
     if (event.target.checked) {
@@ -288,22 +349,20 @@ function CourseIndex() {
   const deleteCourse = (event) => {
     const _id = event.currentTarget.dataset.courseId;
     console.log(_id);
-    axios.delete(`${env.API_BASE_URL}course/${_id}`)
-    .then(response => {
-      getCourses();
-      console.log(response);
-      // handle success
-    })
-    .catch(error => {
-      console.log(error);
-      // handle error
-    });
+    if (window.confirm('Are you sure you want to delete this course?')) {
+      axios.delete(`${env.API_BASE_URL}course/${_id}`)
+        .then(response => {
+          getCourses();
+          console.log(response);
+          // handle success
+        })
+        .catch(error => {
+          console.log(error);
+          // handle error
+        });
+    }
   };
   useEffect(() => {
-
-    if (img) {
-      postCourse();
-    }
     getCourses();
     getBranchList();
     getVehiceCourseList();
@@ -312,7 +371,7 @@ function CourseIndex() {
 
     return (
       <div className="course-main mt-5">
-        <Row>
+        <Row className="course-list">
           {courses?.length == 0 ? 
           <Col md={3}>
             <Card className="shadow-none no-transform">
@@ -352,7 +411,7 @@ function CourseIndex() {
                   {course.short_desc}
                 </CardText>
                 <div className="action-footer">
-                  <Button className="btn-edit" color="primary">
+                  <Button className="btn-edit" color="primary" onClick={() => handleClickUpdateCourse(course)}>
                     Edit
                   </Button>
                   <Button type="button" className="btn-delete" color="danger" data-course-id={course._id} onClick={deleteCourse}>
@@ -364,13 +423,17 @@ function CourseIndex() {
           </Col>
         ))}
         </Row>
+        <div id="createCourse"></div>
         <h6 className="mt-4">Create Course</h6>
         <Card className="create-course no-transform shadow-none">
           <CardBody>
-            <form className="w-100" ref={formRef} onSubmit={handleSubmit}>
-              <FormGroup>
-                  <Label for="coursePhoto">Course Picture</Label>
-                  <Input id="coursePhoto" type="file" onChange={handleFileChange} required />
+            <Form className="w-100" onSubmit={handleSubmit}>
+              <FormGroup className="course-img">
+                  {preview && <img src={preview} alt="course image" />}
+                  <div>
+                    <Label tag="h6" for="coursePhoto">Course Picture</Label>
+                    <Input id="coursePhoto" type="file" onChange={handleFileChange} />
+                  </div>
               </FormGroup>
               <Row>
                 <Col>
@@ -461,7 +524,7 @@ function CourseIndex() {
                 <Label tag="h6">Long Description</Label>
                 <CKEditor
                   editor={ ClassicEditor }
-                  data="<p>Format your long details here...</p>"
+                  data={long_desc ? long_desc : "Write long and format details here..."}
                   onReady={ editor => {
                       // You can store the "editor" and use when it is needed.
                       console.log( 'Editor is ready to use!', editor );
@@ -475,9 +538,10 @@ function CourseIndex() {
                 />
               </FormGroup>
               <div className="action-btns">
-                  <Button type="submit" color="primary">Create</Button>
+                  <Button type="submit" color="primary">{METHOD === 'post' ? 'Create' : 'Update'}</Button>
+                  {METHOD !== 'post' && <Button type="button" color="danger" className="ml-3" onClick={resetForm}>Cancel</Button>}
               </div>
-              </form>
+              </Form>
           </CardBody>
       </Card>
       </div>

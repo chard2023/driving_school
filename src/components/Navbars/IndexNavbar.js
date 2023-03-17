@@ -50,14 +50,14 @@ function IndexNavbar() {
     getCourses();
     const updateNavbarColor = () => {
       if (
-        document.documentElement.scrollTop > 299 ||
-        document.body.scrollTop > 299
+        document.documentElement.scrollTop > 99 ||
+        document.body.scrollTop > 99
       ) {
         setNavbarColor("");
         setLogoSize("small")
       } else if (
-        document.documentElement.scrollTop < 300 ||
-        document.body.scrollTop < 300
+        document.documentElement.scrollTop < 100 ||
+        document.body.scrollTop < 100
       ) {
         setNavbarColor("navbar-transparent");
         setLogoSize("")
@@ -82,8 +82,7 @@ function IndexNavbar() {
           <div className="main-nav navbar-translate">
             <NavbarBrand
               data-placement="bottom"
-              href="/index"
-              target="_blank"
+              href="/"
               title="Coded by Creative Tim"
             >
               <img
@@ -118,7 +117,7 @@ function IndexNavbar() {
               </NavItem>
               <NavItem className="dropdown">
                 <NavLink href="/" className="dropbtn">
-                  About A-1 <i className="nc-icon nc-minimal-down" />
+                  About Us <i className="nc-icon nc-minimal-down" />
                 </NavLink>
                 <div className="dropdown-content">
                   <a href="#">The A-1 Advantage</a>
