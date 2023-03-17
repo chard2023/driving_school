@@ -5,7 +5,6 @@ import React from "react";
 // core components
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
-import Footer from "components/Footers/footer";
 
 // index sections
 import SectionButtons from "views/index-sections/SectionButtons.js";
@@ -34,22 +33,21 @@ function Index() {
     <>
       <IndexHeader />
       <div className="main">
-        <SectionButtons />
-        <SectionNavbars />
-        <SectionNavigation />
-        <SectionProgress />
-        <SectionNotifications />
-        <SectionTypography />
-        <SectionJavaScript />
-        <SectionCarousel />
-        <SectionNucleoIcons />
-        <SectionDark />
-        <SectionLogin />
-        <SectionExamples />
-        <SectionDownload />
-        <DemoFooter />
+        {/* <SectionButtons />
+        {/* <SectionNavbars /> */}
+        {/* <SectionNavigation /> */}
+        {/* <SectionProgress /> */}
+        {/* <SectionNotifications /> */}
+        {/* <SectionTypography /> */}
+        {/* <SectionJavaScript /> */}
+        {/* <SectionCarousel /> */}
+        {/* <SectionNucleoIcons /> */}
+        {/* <SectionDark /> */}
+        {/* <SectionLogin /> */}
+        {/* <SectionExamples /> */}
+        {/* <SectionDownload /> */}
+        {/* <DemoFooter /> */}
       </div>
-      <Footer />
     </>
   );
 }

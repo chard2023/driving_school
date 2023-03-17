@@ -88,7 +88,7 @@ function IndexNavbar() {
               <img
               alt="..."
               className={classnames("brand-logo", logoSize)}
-              src={require("assets/img/logo1.png")}
+              src={logoSize === 'small' ? require("assets/img/logo1.png") : require("assets/img/logo2.png")}
             />
               {/* Paper Kit React */}
             </NavbarBrand>

@@ -17,7 +17,7 @@ import AdminRegister from "views/admin/register";
 import CartIndex from 'views/pages/cart';
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-
+import Footer from 'components/Footers/footer';
 // Admin
 import AdminIndex from "views/admin";
 
@@ -53,6 +53,7 @@ import AdminIndex from "views/admin";
             )}
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
+        <Footer />
     </>
   )
 }
