@@ -1,0 +1,19 @@
+.promos-main table {
+    border: solid 1px #d6d6d6;
+    button.btn-remove {
+        background-color: transparent;
+        border-color: transparent;
+        color: red;
+        padding: 0;
+        font-size: 22px;
+        line-height: 22px;
+        border-radius: 90px;
+        width: 25px;
+        height: 25px;
+        &:hover {
+            background-color: red;
+            color: #ffffff;
+            border-color: red;
+        }
+    }
+}

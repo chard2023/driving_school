@@ -9,6 +9,7 @@ import { Button, Container } from "reactstrap";
 function AccountHeader() {
   const [userData, setUserData] = useState(null);
   const [showLogout, setShowLogout] = useState(false);
+  const [cartData, setCartData] = useState([]);
   const updateUserData = () => {
     let userLogin = JSON.parse(localStorage.getItem('loginData'));
     setUserData(userLogin);
@@ -21,10 +22,22 @@ function AccountHeader() {
     const event = new Event('loginData');
     window.dispatchEvent(event);
   }
+  const initCartData = () => {
+    const localCart = JSON.parse(localStorage.getItem('cartData'));
+    console.log("cartData: ",localCart);
+    if (localCart) {
+      setCartData(localCart);
+    } else {
+      localStorage.setItem('cartData', JSON.stringify(cartData));
+    }
+  }
   useEffect(() => {
     updateUserData();
+    initCartData();
     window.addEventListener('loginData', updateUserData);
+    window.addEventListener('cartData', initCartData);
   }, []);
+
   return (
     <div className="account-header">
     <Container>
@@ -44,7 +57,7 @@ function AccountHeader() {
         </li>
         }
         <li>
-          <a href="">0 Items</a>
+          <a href="/cart">{cartData?.length} Items</a>
         </li>
       </ul>
     </nav>

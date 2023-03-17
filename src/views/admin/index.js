@@ -15,6 +15,7 @@ import CourseIndex from './courses';
 import BranchIndex from './branches';
 import TrainingCenterIndex from './trainingCenter';
 import TrainingVehiclesIndex from './trainingVehicles';
+import PromoIndex from './promos';
 
 function AdminIndex() {
     const location = useLocation();
@@ -40,7 +41,13 @@ function AdminIndex() {
                 <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block sidebar collapse">
                     <div className="position-sticky pt-3">
                         <div className="brand-logo">
-                            <h5 className="text-bold">Company Name</h5>
+                            {/* <h5 className="text-bold">Company Name</h5> */}
+                            <a href="/">
+                                <img
+                                alt="..."
+                                src={require("assets/img/logo1.png")}
+                                />
+                            </a>
                         </div>   
                         <div className="border-bottom"/>
                         <ul className="nav flex-column">
@@ -91,6 +98,14 @@ function AdminIndex() {
                                 </Link>
                             </li>
                             <li className="nav-item">
+                                <Link className={current_tab === "promos" ? "nav-link active": "nav-link"}
+                                to="promos"
+                                tag={Link}
+                                >
+                                Promos
+                                </Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className={current_tab === "FAQs" ? "nav-link active": "nav-link"}
                                 to="FAQs"
                                 tag={Link}
@@ -125,7 +140,7 @@ function AdminIndex() {
                         {current_tab === 'branches' ? <BranchIndex /> : null}
                         {current_tab === 'training-centers' ? <TrainingCenterIndex /> : null}
                         {current_tab === 'vehicle-courses' ? <TrainingVehiclesIndex /> : null}
-                        
+                        {current_tab === 'promos' ? <PromoIndex /> : null}
                     </div>
                 </main>
             </div>
