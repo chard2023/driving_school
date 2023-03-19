@@ -20,7 +20,7 @@ const EasyEnroll = () => {
             </ol>
             <br />
             <div className="text-center">
-                <Button className="btn btn-enroll-today" color="primary">Enroll Today! <i class="bi bi-arrow-right"></i></Button>
+                <Button className="btn btn-enroll-today" color="primary">Enroll Today! <i className="bi bi-arrow-right"></i></Button>
             </div>
             <div className="p-4"></div>
             <div className="recent-events">
