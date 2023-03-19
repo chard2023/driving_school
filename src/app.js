@@ -53,7 +53,7 @@ import AdminIndex from "views/admin";
             )}
             <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-        <Footer />
+      {(!location.pathname.includes("/register")&&!location.pathname.includes("/login")&&!location.pathname.includes("/admin")) && <Footer />}
     </>
   )
 }
