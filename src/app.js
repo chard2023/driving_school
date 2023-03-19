@@ -15,6 +15,8 @@ import RegisterPage from "views/examples/RegisterPage.js";
 import Products from "views/pages/products";
 import AdminRegister from "views/admin/register";
 import CartIndex from 'views/pages/cart';
+import FaqsPage from 'views/pages/FQA';
+
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from 'components/Footers/footer';
@@ -38,6 +40,7 @@ import AdminIndex from "views/admin";
             <Route path="/landing-page" element={<LandingPage />}/>
             <Route path="/profile-page" element={<ProfilePage />}/>
             <Route path="/cart" element={<CartIndex />}/>
+            <Route path="/FQAs" element={<FaqsPage />}/>
             
             {!userDate && (
               <>

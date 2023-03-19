@@ -37,7 +37,7 @@ function FeaturedIndex() {
                                 
                                 <CardText>{item?.short_desc.slice(0, 100)}...</CardText>
                                 <CardSubtitle
-                                className="mb-2 text-muted"
+                                className="mb-2 text-primary"
                                 tag="h6"
                                 >
                                 Starts at Php {item?.starting_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}

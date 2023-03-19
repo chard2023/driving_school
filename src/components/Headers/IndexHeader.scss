@@ -8,4 +8,23 @@
 }
 
 
-  
+.profile-header-section {
+    .container {
+        position: absolute;
+        z-index: 2;
+        bottom: 30px;
+        .content {
+            h3 {
+                color: #ffffff;
+                font-weight: 500;
+            }
+            p {
+                color: #ffffff;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+.profile-header-section .container .content h2 {
+}
