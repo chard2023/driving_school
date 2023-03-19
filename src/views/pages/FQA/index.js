@@ -23,7 +23,8 @@ const Faqs = () => {
     <>
         <ProfilePageHeader data={page} />
         <Container>
-            <div className="accordions mt-5">
+          <div className="p-5"></div>
+            <div className="accordions">
             <FaqAccordion
                 id="faq1"
                 question="What is React?"
