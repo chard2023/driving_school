@@ -47,7 +47,7 @@ function DashboardIndex() {
                   color="dark"
                   outline
                 >
-                  <CardHeader class="d-flex justify-content-between align-items-end">
+                  <CardHeader className="d-flex justify-content-between align-items-end">
                     {item?.fname} {item?.lname}
                     <small>{new Date(item?.created_at).toLocaleDateString()}</small>
                   </CardHeader>
