@@ -99,17 +99,10 @@ function CheckoutIndex() {
                         <Label>Email address <span className="required">*</span></Label>
                         <Input type="email" name="email" />
                     </FormGroup>
-                    <FormGroup>
-                        <Label>Date of Birth <span className="required">*</span></Label>
-                        <Input type="date" name="dob" />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label>Place of Birth <span className="required">*</span></Label>
-                        <Input type="text" name="dob" />
-                    </FormGroup>
                 </Col>
                 <Col>
-                    <h3>Preferred Branch</h3>
+                    <h3>Checkout Details</h3>
+
                 </Col>
             </Row>
         </Form>
