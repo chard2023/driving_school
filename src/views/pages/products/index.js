@@ -5,10 +5,13 @@ import ProfilePageHeader from "components/Headers/ProfilePageHeader";
 import ProductDetails from "./product";
 function Products() {
   const { productId } = useParams();
-  console.log(productId);
+  const page = {
+    title: "Courses",
+    short_desc: "Choose from a variety of training vehicles and schedules that fits your needs."
+  }
   return (
     <>
-      <ProfilePageHeader />
+      <ProfilePageHeader data={page} />
       <ProductDetails productId={productId}/>
     </>
   );

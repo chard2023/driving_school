@@ -76,7 +76,10 @@ function CartIndex() {
     setToastMessage('');
     setToastStatus('');
   };
-
+  const page = {
+    title: "TALA Course Cart",
+    short_desc: ""
+  }
   useEffect(() => {
     const storedCartData = JSON.parse(localStorage.getItem('cartData')) || [];
     if (storedCartData) {
@@ -105,7 +108,7 @@ function CartIndex() {
     {showToaster && (
         <Toaster message={toastMessage} type={toastStatus} onClose={handleCloseToaster} />
       )}
-    <ProfilePageHeader />
+    <ProfilePageHeader data={page} />
 
     <Container className="CartIndex pt-5 mt-4">
         <Table striped className="mb-0">
