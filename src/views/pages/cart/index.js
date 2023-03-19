@@ -185,7 +185,7 @@ function CartIndex() {
                                 {promoData?.discount_type === "amount" ? 
                                 <td>PHP {promoData.value?.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} OFF</td>
                                 : <td>{promoData.value}% OFF</td>
-                            }
+                                }
                                 
                             </tr>}
                             <tr>

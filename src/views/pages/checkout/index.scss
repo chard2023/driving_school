@@ -1,4 +1,79 @@
 .CheckoutIndex {
-    
-    
+    .required {
+        color: red;
+    }
+    h3.heading {
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+    .card.checkout-details {
+        strong{
+            font-weight: 500;
+        }
+        p {
+            font-weight: 400;
+        }
+        overflow: hidden;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+        }
+        li.list-group-item {
+            display: flex;
+            justify-content: space-between;
+            &.discount {
+                background-color: #51cbce;
+                color: #ffffff;
+            }
+        }
+    }
+    .card.payment-method {
+        overflow: hidden;
+        h4 {
+            margin: 0px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .card-header {
+            .form-check {
+                margin-left: 20px;
+                label.form-check-label {
+                    padding-left: 0px;
+                    font-weight: 500;
+                    span.form-check-sign {
+                        color: #51cbce!important;
+                    }
+                }
+            }
+            .form-check-radio {
+                label.form-check-label {font-weight: 500;margin-top: 4px;}
+            }
+            .form-check-radio input[type=radio]:checked + .form-check-sign::after {
+                color: #51cbce;
+            }
+        }
+        li.list-group-item {
+            .form-check-label input[type=checkbox]:checked + .form-check-sign:before {
+                background-color: #51cbce;
+            }
+            label.form-check-label {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 19px;
+            }
+            p.note {
+                font-size: 14px;
+                font-weight: 500;
+                margin-bottom: 15px;
+                a {
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #51cbce;
+                }
+            }
+            .form-check .form-check-sign::after {
+                top: 2px;
+            }
+        }
+    }
 }
