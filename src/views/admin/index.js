@@ -45,7 +45,7 @@ function AdminIndex() {
                             <a href="/">
                                 <img
                                 alt="..."
-                                src={require("assets/img/logo1.png")}
+                                src={require("assets/img/logo.png")}
                                 />
                             </a>
                         </div>   
