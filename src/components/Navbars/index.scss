@@ -12,6 +12,22 @@
     list-style: none;
     gap: 10px;
     margin: 0px;
+    li.account {
+        position: relative;
+        button.logout {
+            position: absolute;
+            left: 0;
+            top: 17px;
+            right: 0;
+            padding: 6px 0;
+            border-radius: 0px;
+            background-color: #00000061;
+            border: none;
+            &:hover {
+                background-color: #000000!important;
+            }
+        }
+    }
 }
 .account-header nav ul li {
     padding: 5px 0;
@@ -21,6 +37,7 @@
     color: #ffffff;
     font-size: 12px;
     font-weight: 400;
+    cursor: pointer;
 }
 
 .nav-link {
@@ -89,5 +106,15 @@ i.nc-icon {
         left: -190px;
         right: unset;
         top: 0;
+    }
+}
+
+.main-nav {
+    img.brand-logo {
+        max-width: 230px;
+        transition: .3s;
+        &.small {
+            max-width: 130px;
+        }
     }
 }

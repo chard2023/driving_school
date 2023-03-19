@@ -1,0 +1,12 @@
+.add-vehicle-course {
+    .form-check .form-check-sign::after {
+        top: 0px!important;
+    }
+    
+    span.form-check-sign {
+        background-color: #17c1e8;
+    }
+    &.no-transform:hover {
+        transform: none!important;
+    }
+}

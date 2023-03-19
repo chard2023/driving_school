@@ -1,0 +1,21 @@
+.user-register {
+    .card-register {
+        background-color: #000000a8;
+    }
+    .toggle-eye {
+        position: absolute;
+        right: 25px;
+        bottom: 8px;
+        cursor: pointer;
+        i {
+            color: #000000;
+            font-weight: bold;
+        }
+    }
+    .invalid-text {
+        color: red;
+        font-size: 11px;
+        position: absolute;
+        font-weight: 400;
+    }
+}

@@ -1,0 +1,29 @@
+.course-main {
+    .card {
+        .action-footer {
+            text-align: right;
+            button.btn-delete {
+                padding: 5px 7px;
+                font-size: 22px;
+                line-height: 22px;
+                color: #f5593d;
+                background-color: #ffffff;
+            }
+            button.btn-edit {
+                padding: 6px 10px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .create-course {
+        .card-body {
+            p.note {
+                position: absolute;
+                font-size: 10px;
+                color: #0083a1;
+                font-weight: 500;
+            }
+        }
+    }
+}
