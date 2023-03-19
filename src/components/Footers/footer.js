@@ -51,7 +51,7 @@ function Footer() {
               <a key={index} href={`/courses/${item?._id}`}>
                 <div className="course mb-3">
                   <img src={item?.img} />
-                  <p className="text-primary">{item?.course_name}</p>
+                  <p className="text-primary">{item?.course_name.slice(0, 50)}...</p>
                 </div>
               </a>
             ))}
