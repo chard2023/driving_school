@@ -1,8 +1,10 @@
 import React from "react";
 
 // reactstrap components
+import { Container } from "reactstrap";
 
 // core components
+import "./index.scss"
 import IndexHeader from "components/Headers/IndexHeader.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 
@@ -20,6 +22,8 @@ import SectionDark from "views/index-sections/SectionDark.js";
 import SectionLogin from "views/index-sections/SectionLogin.js";
 import SectionExamples from "views/index-sections/SectionExamples.js";
 import SectionDownload from "views/index-sections/SectionDownload.js";
+import FeaturedIndex from "components/Featured";
+
 
 function Index() {
   document.documentElement.classList.remove("nav-open");
@@ -32,7 +36,10 @@ function Index() {
   return (
     <>
       <IndexHeader />
-      <div className="main">
+      <Container className="home-main mt-5 pt-4">
+        <h3 className="section-title">Featured Courses & Services</h3>
+        <p className="section-subtitle mb-5">Choose from a variety of vehicles, schedule and instructors that fits your needs</p>
+        <FeaturedIndex />
         {/* <SectionButtons />
         {/* <SectionNavbars /> */}
         {/* <SectionNavigation /> */}
@@ -47,7 +54,7 @@ function Index() {
         {/* <SectionExamples /> */}
         {/* <SectionDownload /> */}
         {/* <DemoFooter /> */}
-      </div>
+      </Container>
     </>
   );
 }

@@ -1,7 +1,6 @@
 .footer-section {
-    
-        background-image: url('../../assets/img/footer-background.png');
-        
+    background-image: url('../../assets/img/footer-background.png');
+    margin-top: 60px;
     .row{
         padding-top: 50px;
         padding-left: 20px;
@@ -14,9 +13,23 @@
     h3,p{
         color: aliceblue;
     }
-    p{
-        font-size: 14px;
-        font-weight: 300;
+    p,a {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    h4 {
+        font-weight: 500;
+        color: #ffffff;
+        margin-top: 0px;
+    }
+    .copy-right {
+        background-color: #171717;
+        p {
+            margin: 0px;
+            color: #666666;
+            padding: 15px 0;
+            font-size: 14px;
+        }
     }
    
 }
