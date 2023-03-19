@@ -1,14 +1,26 @@
 /*eslint-disable*/
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./footer.scss";
+import env from "../../env";
 
 // reactstrap components
 import { Row, Col, Container } from "reactstrap";
 
 function Footer() {
-
   const longText = "started operating on January 31, 2020. Armed with only two training vehicles, a toyota vios and toyota wigo, and loads of determination to succeed, we opened our first registration office at Legaspy City, Albay. We are an LTO-ACCREDITED DRIVING SCHOOL that provides Quality and Affordable Driving Lessons. Today, with 5 branches nationwide and over 15 modern training vehicles to choose from, Tala Driving School continues to serve the needs of the growing number of student drivers. Our experienced and well-trained instructors that carry government accreditation as professional driving instructors and lecturers. We will be Your Guide to Driving Excellence!"
+  const [courses, setCourses] = useState([]);
+  const getCourses = () => {
+    axios.get(`${env.API_BASE_URL}course`)
+    .then(res => {
+      setCourses(res.data);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+  useEffect(() => {
+    getCourses();
+  }, []);
   return (
 
     <footer className="footer-section">
@@ -35,46 +47,14 @@ function Footer() {
           </Col>
           <Col md={3}>
             <h3 className="row-title">TOP COURSES</h3>
-            <p>
-            <a href="#">
-              <img />
-              PREMIUM
-              <br />
-              Get to drive using any of
-              <br />
-              our training vehicles
-            </a>
-            </p>
-            <p>
-            <a href="#">
-              <img />
-              EXECUTIVE
-              <br />
-              Free Pick-up and drop-off
-              <br />
-              for our students
-            </a>
-            </p>
-            <p>
-              <a href="#">
-                <img/>
-                RUSH
-                <br></br>
-                Pressed for time? Drive 5-8
-                <br></br>
-                hours straight
+            {courses?.map((item, index) => (
+              <a key={index} href={`/courses/${item?._id}`}>
+                <div className="course mb-3">
+                  <img src={item?.img} />
+                  <p className="text-primary">{item?.course_name.slice(0, 50)}...</p>
+                </div>
               </a>
-            </p>
-            <p>
-              <a href="#">
-                <img />
-                CAR MAINTENANCE 101
-                <br></br>
-                Basic and practical skills to
-                <br></br>
-                maintain your car
-              </a>
-            </p>
+            ))}
           </Col>
           <Col md={3} className="text-center">
             <img src="" alt=""/>
@@ -88,7 +68,7 @@ function Footer() {
       </Container>
       <div className="copy-right">
         <Container>
-          <p>Copyright © A-1 Driving Company, Inc. All Rights Reserved.</p>
+          <p>Copyright © TALA Driving School, All Rights Reserved.</p>
         </Container>
       </div>
     </footer>

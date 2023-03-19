@@ -48,7 +48,7 @@ function CartIndex() {
     console.log(_id);
     if (window.confirm('Are you sure you want to remove the item?')) {
         const cart = JSON.parse(localStorage.getItem('cartData'));
-        const updatedCart = cart.filter((item) => item.course._id !== _id);
+        const updatedCart = cart.filter((item) => item?.course._id !== _id);
         localStorage.setItem('cartData', JSON.stringify(updatedCart));
         setCartData(updatedCart);
         const event = new Event('cartData');
@@ -80,7 +80,7 @@ function CartIndex() {
     title: "TALA Course Cart",
     short_desc: ""
   }
-  useEffect(() => {
+  const initSubTotal = () => {
     const storedCartData = JSON.parse(localStorage.getItem('cartData')) || [];
     if (storedCartData) {
         setCartData(storedCartData);
@@ -90,18 +90,38 @@ function CartIndex() {
         });
         setSubTotal(sub_total);
     }
-    if (promoData) {
-        if(promoData.discount_type === 'percent') {
-            const result = subTotal * (1 - promoData.value / 100);
-            setTotal(result);
+  }
+    const initTotal = () => {
+        if (promoData) {
+            if(promoData.discount_type === 'percent') {
+                const result = subTotal * (1 - promoData.value / 100);
+                setTotal(result);
+            } else {
+                const result = subTotal - promoData.value;
+                setTotal(result);
+            }
         } else {
-            const result = subTotal - promoData.value;
-            setTotal(result);
+            setTotal(subTotal);
         }
-    } else {
-        setTotal(subTotal);
     }
-  }, [promoData]);
+    const proceedCheckout = () => {
+        if (promoData) {
+            localStorage.setItem("promoCode", JSON.stringify(promoData));
+            window.location.href = '/checkout';
+        } else {
+            window.location.href = '/checkout';
+        }
+    }
+  useEffect(() => {
+    initSubTotal();
+    window.addEventListener('cartData', initSubTotal);
+    if (promoData) {
+        initTotal();
+    }
+    if (subTotal) {
+        initTotal()
+    }
+  }, [promoData, subTotal]);
 
   return (
     <>
@@ -125,17 +145,17 @@ function CartIndex() {
                 {cartData?.map((item,index) => (
                     <tr key={index}>
                         <td className="course-img-col">
-                            <Button className="btn-remove" data-course-id={item.course._id} onClick={removeItem}><i className="bi bi-x"></i></Button>
-                            <img className="course-img" src={item.course.img} />
+                            <Button className="btn-remove" data-course-id={item?.course._id} onClick={removeItem}><i className="bi bi-x"></i></Button>
+                            <img className="course-img" src={item?.course.img} />
                             
                         </td>
                         <td>
-                            <a className="course-name" href={`courses${item.course._id}`}>{item.course.course_name}</a>
-                            <h6 className="branch-name">Branch: <span>{item.branch.name}</span></h6>
+                            <a className="course-name" href={`courses${item?.course._id}`}>{item?.course.course_name}</a>
+                            <h6 className="branch-name">Branch: <span>{item?.branch?.name}</span></h6>
                         </td>
-                        <td>PHP {item.total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td>PHP {item?.total.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                         <td>{1}</td>
-                        <td>{(item.total*1).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                        <td>{(item?.total*1).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                     </tr>
                 ))}
                     <tr>
@@ -174,7 +194,7 @@ function CartIndex() {
                             </tr>
                         </tbody>
                     </Table>
-                    <Button color="primary" outline className="w-100">Proceed to checkout</Button>
+                    <Button color="primary" outline className="w-100" onClick={proceedCheckout}>Proceed to checkout</Button>
                 </div>
             </Col>
         </Row>

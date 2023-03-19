@@ -37,6 +37,7 @@ function ProductDetails(props) {
   const loginData = JSON.parse(localStorage.getItem('loginData'));
   const [total, setTotal] = useState(null);
   const [cartData, setCartData] = useState(JSON.parse(localStorage.getItem('cartData'))|| []);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     let payload = {};
@@ -93,12 +94,13 @@ function ProductDetails(props) {
     console.log("payload: ",payload);
     const exist = cartData.find((item) => item.course._id === course._id);
     if (exist) {
-      let res = (window.confirm('This course is already in the cart. Do you want to move to checkout?'));
+      let res = (window.confirm('This course was already added to your the cart. Move to your cart?'));
       if (res) {
-        window.location.href = '/';
+        window.location.href = '/cart';
       }
     } else {
       setCartData(prevState => [...prevState, payload]);
+      window.location.href = '/cart';
     }
   };
   const [hourRates, setHourRates] = useState([]);

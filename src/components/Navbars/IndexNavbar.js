@@ -120,11 +120,11 @@ function IndexNavbar() {
                   About Us <i className="nc-icon nc-minimal-down" />
                 </NavLink>
                 <div className="dropdown-content">
-                  <a href="#">About TALA</a>
+                  <a href="/about-us">About TALA</a>
                   <a href="#">Branches</a>
                   <a href="#">Training Centers</a>
                   <a href="#">Training Vehicles</a>
-                  <a href="#">News & Events</a>
+                  <a href="/news-events">News & Events</a>
                 </div>
               </NavItem>
               <NavItem className="dropdown">
@@ -181,7 +181,7 @@ function IndexNavbar() {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/">
+                <NavLink href="/contact-us">
                   Contact Us
                 </NavLink>
               </NavItem>

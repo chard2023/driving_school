@@ -16,7 +16,11 @@ import Products from "views/pages/products";
 import AdminRegister from "views/admin/register";
 import CartIndex from 'views/pages/cart';
 import FaqsPage from 'views/pages/FQA';
-
+import CotantUs from 'views/pages/contact-us';
+import AboutUs from 'views/pages/about';
+import NewsEvents from 'views/pages/news-events';
+import SpecialPrograms from 'views/pages/special-programs';
+import CheckoutIndex from 'views/pages/checkout';
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from 'components/Footers/footer';
@@ -41,7 +45,11 @@ import AdminIndex from "views/admin";
             <Route path="/profile-page" element={<ProfilePage />}/>
             <Route path="/cart" element={<CartIndex />}/>
             <Route path="/FQAs" element={<FaqsPage />}/>
-            
+            <Route path="/contact-us" element={<CotantUs />}/>
+            <Route path="/about-us" element={<AboutUs />}/>
+            <Route path="/news-events" element={<NewsEvents />}/>
+            <Route path="/special-programs" element={<SpecialPrograms />}/>
+            <Route path="/checkout" element={<CheckoutIndex />}/>
             {!userDate && (
               <>
                 <Route path="/register" element={<UserRegisterPage />}/>
