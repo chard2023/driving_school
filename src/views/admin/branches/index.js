@@ -88,7 +88,7 @@ function BranchIndex() {
         .catch(error => console.error(error));
     }
     useEffect(() => {
-        
+      getBranches();
     }, []);
     return (
       <div className="branch-main mt-5">

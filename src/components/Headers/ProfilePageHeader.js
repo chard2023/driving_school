@@ -8,12 +8,13 @@ import "./IndexHeader.scss"
 function ProfilePageHeader(props) {
   const [title, setTitle] = useState("");
   const [short_desc, setShortDesc] = useState("");
+  const [bg_img, setBG_IMG] = useState(null);
   let pageHeader = createRef();
 
   useEffect(() => {
     setTitle(props.data.title);
     setShortDesc(props.data.short_desc);
-    console.log("props: ",props);
+    setBG_IMG(props.data.bg_img);
     if (window.innerWidth < 991) {
       const updateScroll = () => {
         let windowScrollTop = window.pageYOffset / 3;
@@ -31,8 +32,7 @@ function ProfilePageHeader(props) {
     <>
       <div
         style={{
-          backgroundImage:
-            "url(" + require("assets/img/fabio-mangione.jpg") + ")"
+          backgroundImage: `url(${require(`assets/img/${bg_img ? bg_img:'fabio-mangione.jpg'}`)})`
         }}
         className="page-header page-header-xs profile-header-section"
         data-parallax={true}
