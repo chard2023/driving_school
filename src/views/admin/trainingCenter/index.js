@@ -40,30 +40,49 @@ function TrainingCenterIndex() {
     const [zip, setZip] = useState('');
 
     const [centers, setCenters] = useState(null)
+    const [preview, setPreview] = useState(null);
 
     const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
-    };
-    const handleUpload = () => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result);
+        };
+        reader.readAsDataURL(selectedFile);
+      };
+      const handleUpload = async() => {
         const formData = new FormData();
         formData.append('file', file);
-        axios.post(`${env.API_BASE_URL}upload`)
-        .then((res) => {
-            setFileUrl(res.data.fileUrl);
-        })
-        .catch((error) => {
+        try {
+            const response = await axios.post(`${env.API_BASE_URL}upload`, formData);
+            return response.data;
+        } catch (error) {
             console.log(error);
-        });
+            return null;
+        }
     };
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
-        handleUpload();
+        const formData = { img, name, phone, address, city, state, zip };
+        try {
+            if (file) {
+              const uploadRes = await handleUpload();
+              setFileUrl(uploadRes.fileUrl);
+              if (uploadRes) {
+                formData.img = uploadRes.fileUrl;
+                postCenter(formData);
+              }
+            } else {
+              postCenter(formData);
+            }
+          } catch (error) {
+            console.log(error);
+        }
     };
 
-    const postCenter = () => {
-        const data = { img, name, phone, address, city, state, zip };
-        console.log(data);
-        axios.post(`${env.API_BASE_URL}training_center`)
+    const postCenter = (formData) => {
+        axios.post(`${env.API_BASE_URL}training_center`, formData)
         .then(res => {
             console.log(res)
             getCenters();
@@ -76,11 +95,8 @@ function TrainingCenterIndex() {
         .catch(error => console.error(error));
     }
     useEffect(() => {
-        if (img) {
-            postCenter();
-        }
         getCenters();
-    }, [img]);
+    }, []);
     return (
         <div className="center-main mt-5">
             <h6>Training Centers</h6>
@@ -120,9 +136,12 @@ function TrainingCenterIndex() {
             <Card className="add-center shadow-none">
                 <CardBody>
                 <Form onSubmit={handleSubmit}>
-                    <FormGroup>
-                        <Label for="centerPhoto">Center Picture</Label>
-                        <Input id="centerPhoto" type="file" onChange={handleFileChange} required />
+                    <FormGroup className="center-img">
+                        {preview && <img src={preview} alt="course image" />}
+                        <div>
+                            <Label for="centerPhoto">Center Picture</Label>
+                            <Input id="centerPhoto" type="file" onChange={handleFileChange} required />
+                        </div>
                     </FormGroup>
                     <FormGroup>
                         <Label>Center Name</Label>

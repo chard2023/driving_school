@@ -44,24 +44,36 @@ function BranchIndex() {
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
     };
-    const handleUpload = () => {
+    const handleUpload = async() => {
         const formData = new FormData();
         formData.append('file', file);
-        axios.post(`${env.API_BASE_URL}upload`, formData)
-        .then((res) => {
-            setFileUrl(res.data.fileUrl);
-        })
-        .catch((error) => {
+        try {
+            const response = await axios.post(`${env.API_BASE_URL}upload`, formData);
+            return response.data;
+        } catch (error) {
             console.log(error);
-        });
+            return null;
+        }
     };
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
-        handleUpload();
-    };
-
-    const postBranch = () => {
         const formData = { img, name, phone, address, city, state, zip };
+        try {
+            if (file) {
+              const uploadRes = await handleUpload();
+              setFileUrl(uploadRes.fileUrl);
+              if (uploadRes) {
+                formData.img = uploadRes.fileUrl;
+                postBranch(formData);
+              }
+            } else {
+              postBranch(formData);
+            }
+          } catch (error) {
+            console.log(error);
+        }
+    };
+    const postBranch = (formData) => {
         axios.post(`${env.API_BASE_URL}branch`, formData)
         .then(() => {
             getBranches();
@@ -76,11 +88,8 @@ function BranchIndex() {
         .catch(error => console.error(error));
     }
     useEffect(() => {
-        if (img) {
-            postBranch();
-        }
-        getBranches();
-    }, [img]);
+        
+    }, []);
     return (
       <div className="branch-main mt-5">
         <div className="branch-section">

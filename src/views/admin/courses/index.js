@@ -367,7 +367,7 @@ function CourseIndex() {
     getBranchList();
     getVehiceCourseList();
     getTrainingCenterList();
-  }, [img]);
+  }, []);
 
     return (
       <div className="course-main mt-5">

@@ -16,7 +16,19 @@
                 bottom: 29px;
             }
         }
-        &.add-center:hover {
+        
+    }
+    .add-center {
+        .center-img {
+            display: flex;
+            align-items: end;
+            gap: 15px;
+            img {
+                max-width: 220px;
+                border-radius: 5px;
+            }
+        }
+        &:hover {
             transform: none!important;
         }
     }
