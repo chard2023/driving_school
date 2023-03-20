@@ -99,6 +99,7 @@ function PromoIndex() {
                         <th>#</th>
                         <th>Event Name</th>
                         <th>Promo Code</th>
+                        <th>Amount</th>
                         <th>Discount</th>
                         <th>Status</th>
                         <th>Expiration</th>
@@ -111,6 +112,7 @@ function PromoIndex() {
                             <th scope="row">{index+1}</th>
                             <td>{item?.name}</td>
                             <td>{item?.promo_code}</td>
+                            <td>{item?.value}</td>
                             <td>{item?.discount_type}</td>
                             <td>{item?.status}</td>
                             <td>{new Date(item?.expiration).toLocaleDateString()}</td>
