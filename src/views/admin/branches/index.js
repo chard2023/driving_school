@@ -48,12 +48,7 @@ function BranchIndex() {
       const formData = new FormData();
       formData.append('file', file);
       try {
-        const response = await axios.post(`${env.API_BASE_URL}upload`, formData, {
-          withCredentials: true,
-          headers: {
-            'Access-Control-Allow-Origin': '*'
-          }
-        });
+        const response = await axios.post(`${env.API_BASE_URL}upload`, formData, { withCredentials: true });
         return response.data;
       } catch (error) {
         console.log(error);
