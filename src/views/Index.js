@@ -40,20 +40,20 @@ function Index() {
         <h3 className="section-title">Featured Courses & Services</h3>
         <p className="section-subtitle mb-5">Choose from a variety of vehicles, schedule and instructors that fits your needs</p>
         <FeaturedIndex />
-        <SectionButtons />
-        <SectionNavbars />
-        <SectionNavigation />
-        <SectionProgress />
-        <SectionNotifications />
-        <SectionTypography />
-        <SectionJavaScript />
-        <SectionCarousel />
-        <SectionNucleoIcons />
-        <SectionDark />
-        <SectionLogin />
-        <SectionExamples />
-        <SectionDownload />
-        <DemoFooter />
+        {/* <SectionButtons /> */}
+        {/* <SectionNavbars /> */}
+        {/* <SectionNavigation /> */}
+        {/* <SectionProgress /> */}
+        {/* <SectionNotifications /> */}
+        {/* <SectionTypography /> */}
+        {/* <SectionJavaScript /> */}
+        {/* <SectionCarousel /> */}
+        {/* <SectionNucleoIcons /> */}
+        {/* <SectionDark /> */}
+        {/* <SectionLogin /> */}
+        {/* <SectionExamples /> */}
+        {/* <SectionDownload /> */}
+        {/* <DemoFooter /> */}
       </Container>
     </>
   );
