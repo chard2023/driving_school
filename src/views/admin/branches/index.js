@@ -45,16 +45,22 @@ function BranchIndex() {
         setFile(event.target.files[0]);
     };
     const handleUpload = async() => {
-        const formData = new FormData();
-        formData.append('file', file);
-        try {
-            const response = await axios.post(`${env.API_BASE_URL}upload`, formData);
-            return response.data;
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
+      const formData = new FormData();
+      formData.append('file', file);
+      try {
+        const response = await axios.post(`${env.API_BASE_URL}upload`, formData, {
+          withCredentials: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          }
+        });
+        return response.data;
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
     };
+    
     const handleSubmit = async(event) => {
         event.preventDefault();
         const formData = { img, name, phone, address, city, state, zip };
