@@ -47,14 +47,18 @@ function Footer() {
           </Col>
           <Col md={3}>
             <h3 className="row-title">TOP COURSES</h3>
-            {courses?.map((item, index) => (
-              <a key={index} href={`/courses/${item?._id}`}>
-                <div className="course mb-3">
-                  <img src={item?.img} />
-                  <p className="text-primary">{item?.course_name.slice(0, 50)}...</p>
-                </div>
-              </a>
-            ))}
+            {courses?.map((item, index) => { 
+                if(item?.sub_courses.length === 0) {
+                    return (
+                        <a key={index} href={`/courses/${item?._id}`}>
+                            <div className="course mb-3">
+                                <img src={item?.img} />
+                                <p className="text-primary">{item?.course_name.slice(0, 50)}...</p>
+                            </div>
+                        </a>
+                    );
+                }
+            })}
           </Col>
           <Col md={3} className="text-center">
             <img src="" alt=""/>
