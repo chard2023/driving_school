@@ -46,6 +46,7 @@ function CheckoutIndex() {
     const [promoData, setPromoData] = useState(JSON.parse(localStorage.getItem("promoCode"))||null);
     const [agree, setAgree] = useState(false);
     const [loginData, SetCustomer] = useState(JSON.parse(localStorage.getItem("loginData"))||null);
+    const [successOrder, SetSuccessOrder] = useState(false);
 
   const handleCloseToaster = () => {
     setShowToaster(false);
@@ -103,6 +104,11 @@ function CheckoutIndex() {
         axios.post(`${env.API_BASE_URL}order`, formData)
         .then(res => {
             console.log(res.data)
+            setShowToaster(true);
+            setToastMessage('Order Success! Your purchase has been confirmed and is on its way.');
+            setToastStatus('success');
+            SetSuccessOrder(true);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
         }).catch(err => console.error(err));
     }
     const handleAgree = () => {
@@ -127,6 +133,7 @@ function CheckoutIndex() {
     <ProfilePageHeader data={page} />
         <div className="p-5" />
     <Container className="CheckoutIndex">
+        {!successOrder ? 
         <Form onSubmit={handleSubmit}>
             <Row>
                 <Col md={6}>
@@ -252,6 +259,7 @@ function CheckoutIndex() {
                 </Col>
             </Row>
         </Form>
+        : <h3>Order Success! Your purchase has been confirmed and is on its way.</h3> }
     </Container>
     </>
   );

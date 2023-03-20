@@ -27,22 +27,22 @@ const Faqs = () => {
             <div className="accordions">
             <FaqAccordion
                 id="faq1"
-                question="What is React?"
-                answer="React is a JavaScript library for building user interfaces."
+                question="1. How much does your courses cost?"
+                answer="Our course fees are designed depending on your level of need: Beginner (20-30 Hours), Intermediate (10-15 Hours) or Refresher (8 Hours). Fees starts at P4,000 for the Training Center Course and P5,000 for Premium driving courses. Visit our Courses page for more info."
                 isOpen={openAccordionId === 'faq1'}
                 toggleAccordion={() => toggleAccordion('faq1')}
             />
             <FaqAccordion
                 id="faq2"
-                question="What is Reactstrap?"
-                answer="Reactstrap is a library of UI components for React applications that are built on top of Bootstrap."
+                question="2. What is the difference between premium, executive and rush courses?"
+                answer="For Premium, you start and end your training in your registered branch using the training vehicle of your choice. For the Executive Course, you can be picked-up and dropped-off to and from your location of choice. For the Rush Course, it is 5-8 hours of straight driving."
                 isOpen={openAccordionId === 'faq2'}
                 toggleAccordion={() => toggleAccordion('faq2')}
             />
             <FaqAccordion
                 id="faq3"
-                question="How do I install Reactstrap?"
-                answer="You can install Reactstrap using npm or yarn. See the Reactstrap documentation for more details."
+                question="3. What is the minimum age to learn how to drive? And what are the requirements?"
+                answer="Minimum age is 17 years old. You need a Student Permit to start behind-the-wheel training. The requirements are posted here."
                 isOpen={openAccordionId === 'faq3'}
                 toggleAccordion={() => toggleAccordion('faq3')}
             />
