@@ -55,7 +55,7 @@ function UserLoginPage() {
           <Row>
             <Col>
               <Card className="card-register mt-5">
-                {/* <h3 className="title mx-auto">Welcome</h3> */}
+                <h3 className="title mx-auto">Keep In Touch</h3>
                 <Form className="register-form" onSubmit={handleSubmit}>
                   <Row>
                       <Col md={12}>
@@ -70,12 +70,12 @@ function UserLoginPage() {
                           </div>
                       </Col>
                   </Row>
-                  <Button type="submit" block color="danger">
+                  <Button type="submit" block color="primary">
                     Log In
                   </Button>
                 </Form>
                 <div className="forgot">
-                <Link to="/register" className="btn btn-link btn-danger">Register</Link>
+                <Link to="/register" className="btn btn-link btn-primary">Register</Link>
                 </div>
               </Card>
             </Col>
