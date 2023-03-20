@@ -10,7 +10,7 @@ const Faqs = () => {
   const [openAccordionId, setOpenAccordionId] = useState(null);
   const page = {
     title: "FAQs",
-    short_desc: "Frequently Asked Questions. Here are some common questions about A-1 Driving."
+    short_desc: "Frequently Asked Questions. Here are some common questions about TALA Driving."
   }
   const toggleAccordion = (id) => {
     if (openAccordionId === id) {

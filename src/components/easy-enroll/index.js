@@ -25,7 +25,7 @@ const EasyEnroll = () => {
             <div className="p-4"></div>
             <div className="recent-events">
                 <h5 className="section-heading">Recent Posts</h5>
-                <a href="" >A-1 Launches New Rider Program</a>
+                <a href="" >TALA Launches New Rider Program</a>
                 <a href="" >December 2020 Promo</a>
                 <a href="" >Shell Philippines Partnership Continues</a>
             </div>
