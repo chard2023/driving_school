@@ -17,7 +17,7 @@ const CotantUs = () => {
         <Container className="contant-us">
             <Row>
                 <Col md={4}>
-                    <h4 className="address-heading">TARA Driving Head Office</h4>
+                    <h4 className="address-heading">TALA Driving Head Office</h4>
                     <p><strong>Address: </strong>#2 Sta. Lucia St., Plainview, Mandaluyong City, Metro Manila</p>
                     <p><strong>Phone/Fax: </strong>63.2.532.2272 / 63.2.532.7934</p>
                     <p><strong>Business Hours: </strong>Monday – Saturday; 8:00am – 6:00pm</p>
