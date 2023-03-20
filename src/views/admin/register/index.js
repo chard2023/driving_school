@@ -63,7 +63,7 @@ function AdminRegister() {
           <Row>
             <Col>
               <Card className="card-register mt-5">
-                {/* <h3 className="title mx-auto">Welcome</h3> */}
+                <h3 className="title mx-auto">Admin Register</h3>
                 <Form className="register-form" onSubmit={handleSubmit}>
                   <Row>
                       <Col md={6}>
@@ -98,12 +98,12 @@ function AdminRegister() {
                           }
                       </Col>
                   </Row>
-                  <Button type="submit" block color="danger">
+                  <Button type="submit" block color="primary">
                     Register
                   </Button>
                 </Form>
                 <div className="forgot">
-                  <Link to="/login" className="btn btn-link btn-danger">Log In</Link>
+                  <Link to="/login" className="btn btn-link btn-primary">Log In</Link>
                 </div>
               </Card>
             </Col>

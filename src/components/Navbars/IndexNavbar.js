@@ -143,7 +143,7 @@ function IndexNavbar() {
                       ))}
                     </div>
                   </div>
-                  :<a href="#">Training Center Course (TCC)</a>}
+                  :<a href={`/courses/${course._id}`}>{course?.course_name}</a>}
                   </div>
                 ))}
                   {/* <div className="dropdown">
